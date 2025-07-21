@@ -120,7 +120,10 @@ const authController = {
     },
 
     logout: (request, response) => {
-        response.clearCookie('jwtToken');
+        response.clearCookie('jwtToken',{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+        });
         response.json({ message: 'Logout successfull' });
     },
 
